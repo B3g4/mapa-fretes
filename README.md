@@ -18,7 +18,7 @@ A ferramenta permite visualizar rapidamente quanto custa transportar uma carga g
 - Painel lateral com detalhes do estado selecionado
 - Rankings de estados mais caros e mais baratos
 - Indicação de regiões adversas (custo anômalo ou acesso difícil)
-- Layout responsivo com suporte a dispositivos móveis
+- **Mobile**: bottom sheet deslizante — toque em um estado para abrir os detalhes automaticamente
 
 ## Tecnologias
 
@@ -43,7 +43,10 @@ open index.html    # macOS
 
 ## Deploy
 
-O projeto está configurado para deploy na [Vercel](https://vercel.com/) via `vercel.json`.
+O projeto está disponível em produção na Vercel:
+**https://mapa-fretes.vercel.app**
+
+Configurado via `vercel.json` para deploy automático.
 
 ## Aviso
 
