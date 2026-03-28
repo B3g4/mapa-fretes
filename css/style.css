@@ -1,0 +1,264 @@
+/* =============================================
+   Mapa de Fretes Brasil — Estilos
+   Referência: São Paulo = 1.0×
+   ============================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0b1120;
+  color: #e2e8f0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+header {
+  background: #111827;
+  padding: 12px 20px;
+  border-bottom: 1px solid #1f2d40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 1000;
+}
+.header-left   { display: flex; align-items: center; gap: 14px; }
+.header-icon   { font-size: 1.6rem; }
+h1             { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; letter-spacing: -0.01em; }
+.subtitle      { font-size: 0.72rem; color: #64748b; margin-top: 1px; }
+.header-badge  {
+  background: #1e2d40; border: 1px solid #2d4a6e;
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 0.72rem; color: #7dd3fc; white-space: nowrap;
+}
+
+/* ── Layout ── */
+.main  { display: flex; flex: 1; overflow: hidden; }
+#map   { flex: 1; position: relative; }
+.leaflet-container { background: #0b1120; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 380px;
+  background: #111827;
+  border-left: 1px solid #1f2d40;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ── Info Panel ── */
+.info-panel {
+  padding: 18px 16px;
+  border-bottom: 1px solid #1f2d40;
+  min-height: 220px;
+}
+.placeholder-text {
+  color: #374151; font-size: 0.82rem;
+  text-align: center; padding: 24px 8px; line-height: 1.6;
+}
+.placeholder-text span { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 600; margin-bottom: 10px;
+}
+.badge-adverse   { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); }
+.badge-reference { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.3); }
+.badge-normal    { background: rgba(30,58,95,.5);    color: #93c5fd; border: 1px solid rgba(59,130,246,.2); }
+
+/* State info */
+.state-name      { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; }
+.state-region    { font-size: 0.72rem; color: #6b7280; }
+.multiplier-box  { display: flex; align-items: baseline; gap: 6px; margin: 12px 0 4px; }
+.multiplier-value { font-size: 2.8rem; font-weight: 800; line-height: 1; }
+.multiplier-label { font-size: 0.75rem; color: #6b7280; }
+
+.example-box {
+  background: #0b1120; border-radius: 8px;
+  padding: 10px 12px; margin: 10px 0; border: 1px solid #1f2d40;
+}
+.example-label { font-size: 0.65rem; color: #4b5563; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.example-value { font-size: 1.15rem; font-weight: 700; }
+
+.regioes-box {
+  background: #0b1120; border-radius: 8px;
+  padding: 10px 12px; margin: 8px 0;
+  border: 1px solid #1e3a5f;
+}
+.regioes-title {
+  font-size: 0.65rem; color: #4b5563; text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: 7px;
+}
+.regioes-table {
+  width: 100%; border-collapse: collapse; font-size: 0.75rem;
+}
+.regioes-table thead th {
+  color: #374151; font-weight: 600; font-size: 0.62rem;
+  text-transform: uppercase; letter-spacing: .05em;
+  padding: 0 4px 4px 0; border-bottom: 1px solid #1e2d3e; text-align: left;
+}
+.regioes-table tbody tr { border-bottom: 1px solid #111827; }
+.regioes-table tbody tr:last-child { border-bottom: none; }
+.regioes-table tbody td { padding: 4px 4px 4px 0; color: #9ca3af; vertical-align: middle; }
+.regioes-table td.cep-cell { color: #60a5fa; font-size: 0.7rem; font-family: monospace; white-space: nowrap; }
+.regioes-table td.mult-cell { font-weight: 700; font-size: 0.82rem; text-align: right; white-space: nowrap; padding-right: 0; }
+
+.factor-box {
+  background: #0f1827; border-radius: 8px;
+  padding: 10px 12px; margin: 8px 0; border-left: 3px solid #374151;
+}
+.factor-label { font-size: 0.65rem; color: #4b5563; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.factor-value { font-size: 0.82rem; font-weight: 600; }
+.state-desc   { font-size: 0.79rem; color: #9ca3af; line-height: 1.55; margin-top: 8px; }
+
+/* ── Legend ── */
+.legend-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid #1f2d40;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 0.65rem; color: #4b5563;
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px;
+}
+.gradient-bar {
+  height: 12px; border-radius: 6px;
+  background: linear-gradient(to right, #6366f1, #22c55e, #eab308, #ef4444, #7c3aed);
+  margin-bottom: 6px;
+}
+.gradient-labels {
+  display: flex; justify-content: space-between;
+  font-size: .68rem; color: #6b7280; margin-bottom: 8px;
+}
+.legend-items      { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.legend-item       { display: flex; align-items: center; gap: 8px; font-size: .75rem; color: #9ca3af; }
+.legend-dot        { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.legend-adverse-dot {
+  width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
+  border: 2px solid #f59e0b; background: rgba(245,158,11,.1);
+}
+
+/* ── Stats ── */
+.stats-section { padding: 14px 16px; overflow-y: auto; flex: 1; }
+.stats-list    { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px 10px; border-radius: 6px; background: #0b1120;
+  font-size: .78rem; cursor: pointer; transition: background .15s;
+}
+.stat-row:hover { background: #1f2d40; }
+.stat-name { color: #9ca3af; }
+.stat-mult { font-weight: 700; }
+.disclaimer {
+  font-size: .65rem; color: #374151; line-height: 1.5;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f2d40;
+}
+
+/* ── Botão toggle de modo ── */
+.view-toggle-btn {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 8px;
+  background: #111827;
+  color: #9ca3af;
+  border: 1px solid #1f2d40;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 0.75rem; font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,.5);
+  transition: background .2s, color .2s, border-color .2s;
+  white-space: nowrap;
+}
+.view-toggle-btn:hover { background: #1e2d40; color: #e2e8f0; border-color: #334155; }
+.view-toggle-btn.toggle-active { background: #1e3a5f; color: #7dd3fc; border-color: #2563eb; }
+.view-toggle-btn .ti {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 4px;
+  background: #1f2d40; font-size: 0.7rem; font-weight: 800;
+}
+.view-toggle-btn.toggle-active .ti { background: #1d4ed8; color: #fff; }
+
+/* ── Tooltip ── */
+.custom-tooltip {
+  background: #111827 !important;
+  border: 1px solid #1f2d40 !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  color: #e2e8f0 !important;
+  font-family: inherit !important;
+  font-size: .78rem !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.5) !important;
+}
+
+/* ── Mobile sidebar toggle button ── */
+.sidebar-toggle {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1001;
+  background: #111827;
+  color: #e2e8f0;
+  border: 1px solid #1f2d40;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.5);
+}
+
+/* ── Responsive layout ── */
+@media (max-width: 768px) {
+  body { overflow: auto; }
+
+  header { padding: 10px 14px; }
+  h1 { font-size: 0.9rem; }
+  .subtitle { display: none; }
+  .header-badge { font-size: 0.65rem; padding: 3px 8px; }
+
+  .main {
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+  }
+
+  #map {
+    height: 55vh;
+    min-height: 280px;
+    flex: none;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #1f2d40;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    flex-shrink: 0;
+  }
+  .sidebar.sidebar-open {
+    max-height: 900px;
+    overflow-y: auto;
+  }
+
+  .info-panel { min-height: auto; }
+
+  .multiplier-value { font-size: 2rem; }
+}

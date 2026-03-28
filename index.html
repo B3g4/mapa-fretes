@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Fretes Brasil – Referência São Paulo</title>
+  <meta name="description" content="Mapa interativo de multiplicadores de frete para grandes cargas (colchões e cama box) com origem em São Paulo, baseado na ANTT Portaria SROC nº 3/2026.">
+  <meta property="og:title" content="Mapa de Fretes Brasil – Referência São Paulo">
+  <meta property="og:description" content="Visualize os custos de frete por estado para grandes cargas saindo de SP. Dados ANTT 2026.">
+  <meta property="og:type" content="website">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+
+  <!-- Estilos do projeto -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="header-left">
+      <div class="header-icon">🗺️</div>
+      <div>
+        <h1>Mapa de Fretes Brasil</h1>
+        <div class="subtitle">Grandes cargas (colchões/cama box) · Origem São Paulo · ANTT 2026</div>
+      </div>
+    </div>
+    <div class="header-badge">Referência SP = 1.0×</div>
+  </header>
+
+  <!-- ── Layout principal ── -->
+  <div class="main">
+
+    <!-- Mapa Leaflet -->
+    <div id="map"></div>
+
+    <!-- Sidebar toggle (mobile) -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mostrar painel">&#9776;</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+
+      <!-- Painel de informação do estado selecionado -->
+      <div class="info-panel" id="infoPanel">
+        <div class="placeholder-text">
+          <span>👆</span>
+          Passe o mouse ou clique em um estado para ver os detalhes do frete
+        </div>
+      </div>
+
+      <!-- Legenda -->
+      <div class="legend-section">
+        <div class="section-title">Multiplicador de Frete</div>
+        <div class="gradient-bar"></div>
+        <div class="gradient-labels">
+          <span>SP 1×</span><span>2×</span><span>3×</span><span>5×</span><span>7×</span><span>8×+</span>
+        </div>
+        <div class="legend-items">
+          <div class="legend-item">
+            <div class="legend-adverse-dot"></div>
+            <span>Região adversa – custo anômalo ou acesso difícil</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#6366f1;border:2px solid #818cf8"></div>
+            <span>São Paulo – referência (1.0×)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rankings -->
+      <div class="stats-section">
+        <div class="section-title">Mais Caros</div>
+        <div class="stats-list" id="statsList"></div>
+
+        <div class="section-title">Mais Baratos</div>
+        <div class="stats-list" id="cheapList"></div>
+
+        <div class="disclaimer">
+          ⚠️ Calibrado para grandes cargas (colchões/cama box) com âncora real: Uruguaiana RS ≈ R$500.
+          Fonte: ANTT Portaria SROC nº 3/2026, ILOS, GuiadoTRC. Valores variam por transportadora, volume e sazonalidade.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- Lógica do mapa (GeoJSON + dados + interatividade) -->
+  <script src="js/app.js"></script>
+
+  <script>
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar   = document.getElementById('sidebar');
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+      toggleBtn.textContent = sidebar.classList.contains('sidebar-open') ? '✕' : '☰';
+    });
+  </script>
+
+</body>
+</html>
