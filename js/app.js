@@ -228,6 +228,8 @@ function showInfo(sigla) {
       ? '<span class="badge badge-adverse">⚠️ Região Adversa</span>'
       : '<span class="badge badge-normal">✓ Rota Regular</span>';
 
+  const sheetTitle = document.getElementById('sheetTitle');
+  if (sheetTitle) sheetTitle.textContent = d.nome + ' · ' + (d.mult >= 1 ? d.mult.toFixed(1) + '×' : '1.0×');
   document.getElementById('infoPanel').innerHTML = `
     ${badge}
     <div><div class="state-name">${d.nome}</div>
@@ -301,7 +303,13 @@ function initMap() {
     showInfo(s);
   }
   function onOut(e)   { gjLayer.resetStyle(e.target); }
-  function onClick(e) { showInfo(e.target.feature.properties.sigla); }
+  function onClick(e) {
+    const sigla = e.target.feature.properties.sigla;
+    showInfo(sigla);
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar').classList.add('sidebar-open');
+    }
+  }
 
   function onEach(f, layer) {
     const s = f.properties.sigla, d = FRETES[s];

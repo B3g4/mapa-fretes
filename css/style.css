@@ -199,66 +199,92 @@ h1             { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; letter-sp
   box-shadow: 0 4px 20px rgba(0,0,0,.5) !important;
 }
 
-/* ── Mobile sidebar toggle button ── */
-.sidebar-toggle {
-  display: none;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 1001;
-  background: #111827;
-  color: #e2e8f0;
-  border: 1px solid #1f2d40;
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,.5);
-}
+/* ── Sheet handle (hidden on desktop) ── */
+.sheet-handle { display: none; }
 
 /* ── Responsive layout ── */
 @media (max-width: 768px) {
-  body { overflow: auto; }
+  body { overflow: hidden; }
 
-  header { padding: 10px 14px; }
+  header { padding: 8px 14px; }
   h1 { font-size: 0.9rem; }
   .subtitle { display: none; }
   .header-badge { font-size: 0.65rem; padding: 3px 8px; }
 
   .main {
     flex-direction: column;
-    overflow: visible;
+    flex: 1;
+    overflow: hidden;
     position: relative;
   }
 
   #map {
-    height: 55vh;
-    min-height: 280px;
-    flex: none;
+    flex: 1;
+    height: 100%;
   }
 
-  .sidebar-toggle {
-    display: flex;
-  }
+  /* Push leaflet controls above the sheet handle */
+  .leaflet-bottom { bottom: 64px !important; }
 
+  /* ── Bottom sheet ── */
   .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     border-left: none;
-    border-top: 1px solid #1f2d40;
-    max-height: 0;
+    border-top: none;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -6px 32px rgba(0,0,0,.6);
+    max-height: 75vh;
     overflow: hidden;
-    transition: max-height 0.35s ease;
-    flex-shrink: 0;
+    transform: translateY(calc(100% - 62px));
+    transition: transform 0.35s cubic-bezier(.4, 0, .2, 1);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
   }
+
   .sidebar.sidebar-open {
-    max-height: 900px;
+    transform: translateY(0);
     overflow-y: auto;
   }
 
-  .info-panel { min-height: auto; }
+  /* Sheet handle */
+  .sheet-handle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: #111827;
+    border-radius: 16px 16px 0 0;
+    border-top: 1px solid #1f2d40;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 
+  .sheet-drag-bar {
+    width: 36px;
+    height: 4px;
+    background: #374151;
+    border-radius: 2px;
+    margin-bottom: 7px;
+    flex-shrink: 0;
+  }
+
+  .sheet-title {
+    font-size: 0.78rem;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90vw;
+  }
+
+  .info-panel { min-height: auto; }
   .multiplier-value { font-size: 2rem; }
+  .stats-section { overflow-y: visible; }
 }
